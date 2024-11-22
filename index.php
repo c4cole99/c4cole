@@ -89,7 +89,7 @@ const HomePage = () => {
                             data-aos="fade-up"
                             data-aos-delay="400"
                         >
-                            My Grace Is Sufficient For Thee "II Corinthians 12:9"
+                            Transforming Lives Through Christ's Love
                         </p>
                         <div 
                             className="mt-5"
@@ -125,24 +125,26 @@ const HomePage = () => {
             </section>
 
             {/* Welcome Section */}
-            <section id="welcome" className="py-5 bg-light">
+            <section id="welcome" className="py-5 bg-light text-center">
                 <div className="container">
-                    <div className="row align-items-center">
+                    <div className="row align-items-center justify-content-center">
                         <div className="col-lg-6" data-aos="fade-right">
                             <h2 className="section-header">Welcome to Our Church</h2>
                             <div className="cross-divider">✟</div>
                             <p className="lead">Experience the love of Christ in our community</p>
                             <p>Join us in worship and fellowship as we grow together in faith.</p>
-                            <a href="about.php" className="btn btn-primary mt-3">About Us</a>
                         </div>
-                        <div className="col-lg-6" data-aos="fade-left">
-                            <div className="position-relative">
-                                <img src="assets/images/welcome.jpg" className="img-fluid rounded-3" alt="Welcome" />
-                                <div className="position-absolute bottom-0 end-0 bg-primary text-white p-4 rounded-top-left">
-                                    <h3 className="h4">Join Us This Sunday</h3>
-                                    <p className="mb-0">9:00 AM - 11:00 AM</p>
-                                </div>
-                            </div>
+                    </div>
+                    {/* Sliding Text for Service Times */}
+                    <div className="mt-4">
+                        <div className="sliding-text">
+                            <h3 className="h4 text-primary">
+                                <span className="slide active">Join Us This Sunday: 9:00 AM - 11:00 AM</span>
+                                <span className="slide">Children's Ministry: Sundays at 9:00 AM</span>
+                                <span className="slide">Midweek Bible Study: Wednesdays at 7:00 PM</span>
+                                <span className="slide">Youth Group: Fridays at 6:00 PM</span>
+                                <span className="slide">Join us for our Special Events!</span>
+                            </h3> 
                         </div>
                     </div>
                 </div>
@@ -177,7 +179,7 @@ const HomePage = () => {
                                             <span className="day">25</span>
                                             <span className="month">DEC</span>
                                         </div>
-                                        <img src="assets/images/events/christmas-service.jpg" alt="Christmas Service" />
+                                        <img src="assets/images/events/christmas-service.jpg" alt="Christmas Service" className="img-fluid" />
                                         <div className="event-content">
                                             <h3>Christmas Service</h3>
                                             <p className="mb-2"><i className="fas fa-clock me-2"></i>9:00 AM - 11:00 AM</p>
@@ -251,6 +253,79 @@ ReactDOM.render(<HomePage />, document.getElementById('root'));
 .rounded-top-left {
     border-top-left-radius: 2rem;
 }
+
+/* Sliding Text Animation */
+.sliding-text {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.sliding-text h3 {
+    display: inline-block;
+}
+
+.slide {
+    display: none; /* Hide all slides by default */
+}
+
+.slide.active {
+    display: inline-block; /* Show only the active slide */
+    animation: fade 1s ease-in-out; /* Add fade-in animation */
+}
+
+@keyframes fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Logo Size Adjustment */
+.logo-size {
+    max-width: 10%; /* Adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Centering and Inverted Pyramid Layout */
+#welcome {
+    position: relative;
+}
+
+.section-header {
+    font-size: 2.5rem; /* Adjust size as needed */
+}
+
+.cross-divider {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.lead {
+    font-size: 1.25rem; /* Adjust size as needed */
+}
+
+.mt-4 {
+    margin-top: 2rem; /* Adjust spacing as needed */
+}
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showNextSlide() {
+            slides[currentIndex].classList.remove('active'); // Hide current slide
+            currentIndex = (currentIndex + 1) % slides.length; // Move to the next slide
+            slides[currentIndex].classList.add('active'); // Show next slide
+        }
+
+        // Check if there are slides before setting the interval
+        if (slides.length > 0) {
+            slides[currentIndex].classList.add('active'); // Show the first slide
+            setInterval(showNextSlide, 3000); // Change slide every 3 seconds
+        }
+    });
+</script>
 
 <?php include 'includes/footer.php'; ?> 
